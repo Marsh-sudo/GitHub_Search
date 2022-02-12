@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../user';
-import { Repo } from '../repo';
+import { User } from '../user-class/user';
+import { Repo } from '../repo-class/repo';
 import { environment } from 'src/environments/environment';
 
 
@@ -13,7 +13,7 @@ export class RepoRequestService {
   getUsers!:User;
   getRepos!:Repo
 
-  private username!: string;
+  private userName!: string
   private clientid!:" 6c69630dff9503ee16ec"
   private clientsecret!:"ede1df9c090a73d85914f2745524d7036b254602 "
   getUser!: Response | undefined
@@ -25,21 +25,12 @@ export class RepoRequestService {
    }
 
 
-    searchName(username : string){
-      interface ApiResponse{
-        url:string,
-        html_url:string,
-        avatar_url:string,
-        login:string,
-        followers:number,
-        following:number,
-        repos:number,
-        createDate:Date,
+    searchName(){
 
-      }
+      
 
      let promise = new Promise<void>((resolve,reject)=>{
-      this.http.get<Response>("https://api.github.com/users/" + username + "?clientid=" + this.clientid
+      this.http.get<Response>("https://api.github.com/users/" + this.userName + "?clientid=" + this.clientid
       + "&clientsecret=" + this.clientsecret + environment.apiUrl).toPromise().then(Response=>{
         this.getUser = Response
         resolve();
@@ -51,7 +42,7 @@ export class RepoRequestService {
     }
 
 
-    searchRepos(searchName: string) {
+    searchRepos(repoName: string) {
 
       interface Repos{
         name: string;
@@ -63,7 +54,7 @@ export class RepoRequestService {
         createDate: Date;
       }
       return new Promise<void>((resolve, reject) => {
-        this.http.get<Repos>('https://api.github.com/users/' + searchName + '/repos?order=created&sort=asc?access_token=' + environment.apiUrl)
+        this.http.get<Repos>('https://api.github.com/users/' + repoName + '/repos?order=created&sort=asc?access_token=' + environment.apiUrl)
         .toPromise().then(
           (results) => {
             this.getRepo = results;
