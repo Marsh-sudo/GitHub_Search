@@ -24,6 +24,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.myservice.searchName();
+    this.myservice.searchRepos(t)
+
      interface ApiResponse{
        url : string
        html_url:string
@@ -57,6 +60,7 @@ export class ProfileComponent implements OnInit {
       })
 
     }
-
+    
+    
 
   }

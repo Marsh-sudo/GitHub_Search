@@ -14,6 +14,7 @@ export class RepoRequestService {
   getRepos!:Repo
 
   private userName!: string
+  private repoName!:string
   private clientid!:" 6c69630dff9503ee16ec"
   private clientsecret!:"ede1df9c090a73d85914f2745524d7036b254602 "
   getUser!: Response | undefined
@@ -42,7 +43,7 @@ export class RepoRequestService {
     }
 
 
-    searchRepos(repoName: string) {
+    searchRepos() {
 
       interface Repos{
         name: string;
@@ -54,7 +55,7 @@ export class RepoRequestService {
         createDate: Date;
       }
       return new Promise<void>((resolve, reject) => {
-        this.http.get<Repos>('https://api.github.com/users/' + repoName + '/repos?order=created&sort=asc?access_token=' + environment.apiUrl)
+        this.http.get<Repos>('https://api.github.com/users/' + this.repoName + '/repos?order=created&sort=asc?access_token=' + environment.apiUrl)
         .toPromise().then(
           (results) => {
             this.getRepo = results;
