@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../user';
 import { Repo } from '../repo';
+import { rejects } from 'assert';
 
 
 @Injectable({
@@ -22,8 +23,25 @@ export class RepoRequestService {
    }
 
 
+    searchName(){
+      interface ApiResponse{
+        url:string,
+        html_url:string,
+        avatar_url:string,
+        login:string,
+        followers:number,
+        following:number,
+        repos:number,
+        createDate:Date,
 
-   
+      }
+
+     let promise = new Promise((resolve,reject)=>{
+      this.http.get<Response>("https://api.github.com/users/" +this.username + "?clientid=" + this.clientid
+      + "&clientsecret=" + this.clientsecret)
+     })
+    }
+
 
    getProfileInfo(){
      return this.http.get<Response>("https://api.github.com/users/" +this.username + "?clientid=" + this.clientid
