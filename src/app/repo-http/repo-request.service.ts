@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../user';
 import { Repo } from '../repo';
 import { rejects } from 'assert';
+import { environment } from 'src/environments/environment';
+import 'rxjs/add/operator/map'
 
 
 @Injectable({
@@ -16,6 +18,7 @@ export class RepoRequestService {
   private username!: string;
   private clientid!:" 6c69630dff9503ee16ec"
   private clientsecret!:"ede1df9c090a73d85914f2745524d7036b254602 "
+  getUser: Response | undefined;
 
   constructor(private http: HttpClient) {
        this.getUsers= new User("","",0,0,"","",0, new Date())
@@ -36,15 +39,21 @@ export class RepoRequestService {
 
       }
 
-     let promise = new Promise((resolve,reject)=>{
-      this.http.get<Response>("https://api.github.com/users/" +this.username + "?clientid=" + this.clientid
-      + "&clientsecret=" + this.clientsecret)
+     let promise = new Promise<void>((resolve,reject)=>{
+      this.http.get<Response>(environment.apiUrl).toPromise().then(Response=>{
+        this.getUser = Response
+        resolve();
+      },(error) => {
+        console.log(error);
+        reject();
+      })
      })
     }
 
 
    getProfileInfo(){
-     return this.http.get<Response>("https://api.github.com/users/" +this.username + "?clientid=" + this.clientid
+     return this.http.get<Object("https://api.github.com/users/" +this.username + "?clientid=" + this.clientid
      + "&clientsecret=" + this.clientsecret)
+     .map((res: { json: () => any; }) => res.json());
    }
 }
