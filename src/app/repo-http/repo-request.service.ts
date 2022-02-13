@@ -10,8 +10,8 @@ import { environment } from 'src/environments/environment';
 })
 export class RepoRequestService {
 
-  getUsers!:User;
-  getRepos!:Repo
+  user!:User;
+  repo!:Repo
 
   private userName!: string
   private repoName!:string
@@ -21,14 +21,25 @@ export class RepoRequestService {
   getRepo!: Repo | undefined;
 
   constructor(private http: HttpClient) {
-       this.getUsers= new User("","",0,0,"","",0, new Date())
-       this.getRepos = new Repo("","","",new Date(),"")
+    console.log("service is now working")
+       this.user= new User("","",0,0,"","",0,"", new Date())
+       this.repo = new Repo("","","",new Date(),"","")
    }
 
 
     searchName(){
 
-      
+      interface ApiResponse{
+        url : string
+        html_url:string
+        followers:number
+        following:number
+        avatar_url:string
+        login:string
+        repos:number
+        createDate:Date
+        location:string
+      }
 
      let promise = new Promise<void>((resolve,reject)=>{
       this.http.get<Response>("https://api.github.com/users/" + this.userName + "?clientid=" + this.clientid
@@ -53,6 +64,7 @@ export class RepoRequestService {
         atcherCounted: number;
         language: string;
         createDate: Date;
+        repos_url:string
       }
       return new Promise<void>((resolve, reject) => {
         this.http.get<Repos>('https://api.github.com/users/' + this.repoName + '/repos?order=created&sort=asc?access_token=' + environment.apiUrl)
