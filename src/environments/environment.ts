@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl:"https://api.github.com/users/Marsh-sudo"
+  apiUrl:"https://api.github.com/users/Marsh-sudo",
+  apikey: "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"
 };
 
 /*

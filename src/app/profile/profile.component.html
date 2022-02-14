@@ -1,6 +1,54 @@
-<div>
-    <app-form></app-form>
-</div>
-            {{users.url}} <small>{{users.avatar_url}}</small>
-        
+<h1>Github Search</h1>
+<app-form></app-form>
+<div class="container">
+    <div *ngIf="users">
+        <div class="panel-panel default">
+            <div class="panel-heading">
+                 {{users.name}}<small>{{users.login}}</small>
+                
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <img src="{{users.avatar_url}}" class="img-circle img-responsive" alt="users image">
+                </div>
+                <div class="col-sm-5">
+                    <ul class="list-group">
+                         <li class="list-group-item" *ngIf="users.bio">{{users.bio}}</li>
+                       
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <div>
+                        <p>
+                            <span class="label label-default">{{users.followers}}Followers</span>
+
+                            <span class="label label-default">{{users.following}}following</span>
+    
+                            <span class="label label-default">{{users.public_repos}}Repositories</span>
+    
+                            <span class="label label-default">{{users.followers}}Followers</span>
+                        </p>
+                        <p><a href="{{users.html_url}}" target="_blank" class="btn btn-success btn-sm">View Profile on Github</a></p>
+                       <div class="panel panel-default">
+                           <div class="panel-heading">
+                               <h3 class="panel-heading">Repositories:</h3>
+                           </div>
+                           <div class="panel-body" *ngFor="let repo for repos">
+                               <p>
+                                   {{repos.name}} <a href="{{repos.html_url}}">View this project on 
+                                       Github
+                                   </a>
+                               </p>
+
+                           </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
      
+    </div>
+</div>

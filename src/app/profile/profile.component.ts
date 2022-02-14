@@ -30,6 +30,8 @@ export class ProfileComponent implements OnInit {
     this.repos = this.myservice.repo
 
      interface ApiResponse{
+       name:string
+       bio: string;
        url : string
        html_url:string
        followers:number
@@ -43,8 +45,8 @@ export class ProfileComponent implements OnInit {
     
   this.http.get<ApiResponse>("https://api.github.com/users/").subscribe(data =>{
      //successful api request
-     this.users = new User(data.url,data.html_url,data.followers,data.following
-      ,data.avatar_url,data.login,data.repos,data.location,data.createDate)
+     this.users = new User(data.name,data.url,data.html_url,data.followers,data.following
+      ,data.avatar_url,data.login,data.bio,data.repos,data.location,data.createDate)
   })
   
 

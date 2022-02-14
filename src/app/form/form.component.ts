@@ -7,17 +7,19 @@ import { User } from '../user-class/user';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-  
+  searchName!:string;
   
   constructor() { }
 
 @Output() searchOutput = new EventEmitter<User> ()
-userSearch = new User("","",0,0,"","",0,"",new Date())
+
+userSearch = new User("","","",0,0,"","","",0,"",new Date())
   ngOnInit(): void {
   }
 
   search(){
     this.searchOutput.emit(this.userSearch)
+    
   }
 
 }
