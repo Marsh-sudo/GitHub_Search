@@ -1,36 +1,47 @@
 <h1>Github Search</h1>
+{{user.name}}
+<div>
+    {{user.name}}
+</div>
 <app-form></app-form>
 <div class="container">
-    <div *ngIf="users">
+
+
+
+
+
+
+
+    <div *ngIf="user">
         <div class="panel-panel default">
             <div class="panel-heading">
-                 {{users.name}}<small>{{users.login}}</small>
+                 {{user.name}}<small>{{user.login}}</small>
                 
             </div>
         </div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-sm-3">
-                    <img src="{{users.avatar_url}}" class="img-circle img-responsive" alt="users image">
+                    <img src="{{user.avatar_url}}" class="img-circle img-responsive" alt="users image">
                 </div>
                 <div class="col-sm-5">
                     <ul class="list-group">
-                         <li class="list-group-item" *ngIf="users.bio">{{users.bio}}</li>
+                         <li class="list-group-item" *ngIf="user.bio">{{user.bio}}</li>
                        
                     </ul>
                 </div>
                 <div class="col-sm-4">
                     <div>
                         <p>
-                            <span class="label label-default">{{users.followers}}Followers</span>
+                            <span class="label label-default">{{user.followers}}Followers</span>
 
-                            <span class="label label-default">{{users.following}}following</span>
+                            <span class="label label-default">{{user.following}}following</span>
     
-                            <span class="label label-default">{{users.public_repos}}Repositories</span>
+                            <span class="label label-default">{{user.public_repos}}Repositories</span>
     
-                            <span class="label label-default">{{users.followers}}Followers</span>
+                            <span class="label label-default">{{user.followers}}Followers</span>
                         </p>
-                        <p><a href="{{users.html_url}}" target="_blank" class="btn btn-success btn-sm">View Profile on Github</a></p>
+                        <p><a href="{{user.html_url}}" target="_blank" class="btn btn-success btn-sm">View Profile on Github</a></p>
                        <div class="panel panel-default">
                            <div class="panel-heading">
                                <h3 class="panel-heading">Repositories:</h3>

@@ -12,20 +12,20 @@ import { User } from '../user-class/user';
 })
 export class ProfileComponent implements OnInit {
 
-  users!:User
+  user!:User
   repos!:Repo
   
   
 
   constructor(private myservice:RepoRequestService,private http:HttpClient) { 
-    this.myservice.searchName()
+    // this.myservice.searchName()
 
   }
 
   ngOnInit(): void {
 
     this.myservice.searchName();
-    this.users = this.myservice.user
+    this.user = this.myservice.user
     this.myservice.searchRepos()
     this.repos = this.myservice.repo
 
@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
     
   this.http.get<ApiResponse>("https://api.github.com/users/").subscribe(data =>{
      //successful api request
-     this.users = new User(data.name,data.url,data.html_url,data.followers,data.following
+     this.user = new User(data.name,data.url,data.html_url,data.followers,data.following
       ,data.avatar_url,data.login,data.bio,data.repos,data.location,data.createDate)
   })
   
