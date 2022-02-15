@@ -1,15 +1,12 @@
 <h1>Github Search</h1>
-{{user.name}}
-<div>
-    {{user.name}}
-</div>
-<app-form></app-form>
+<form action="">
+    <div class="form-group">
+        <input type="text" placeholder="Enter username" ngModel="searchname" name="searchname"
+        (keyup)="searchPerson()" >
+    </div>
+</form>
+
 <div class="container">
-
-
-
-
-
 
 
     <div *ngIf="user">
@@ -42,14 +39,14 @@
                             <span class="label label-default">{{user.followers}}Followers</span>
                         </p>
                         <p><a href="{{user.html_url}}" target="_blank" class="btn btn-success btn-sm">View Profile on Github</a></p>
-                       <div class="panel panel-default">
+                       <div class="container">
                            <div class="panel-heading">
                                <h3 class="panel-heading">Repositories:</h3>
                            </div>
                            <div class="panel-body" *ngFor="let repo for repos">
                                <p>
-                                   {{repos.name}} <a href="{{repos.html_url}}">View this project on 
-                                       Github
+                                   {{repo.name}} <a href="{{repo.html_url}}" target="_blank" class="button pull-right">View this repo in 
+                                       Github!
                                    </a>
                                </p>
 
