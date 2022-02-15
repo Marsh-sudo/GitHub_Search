@@ -9,14 +9,13 @@ import { ProfileComponent } from './profile/profile.component';
 import { RepoRequestService } from './repo-http/repo-request.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { ProfilesComponent } from './profiles/profiles.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     NotfoundComponent,
     ProfileComponent,
-    ProfilesComponent,
 
   ],
   imports: [
